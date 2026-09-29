@@ -4,7 +4,7 @@ Teste técnico para a vaga de Desenvolvedor(a) Full Stack na SendFlow — aplica
 
 **Aplicação publicada:** https://sendflow-26d05.web.app — Hosting, Firestore (rules + indexes) e as duas Cloud Functions (`flipDueMessages`, `cascadeDeleteConnection`) estão no ar num projeto Firebase real (plano Blaze), e o fluxo completo foi validado de ponta a ponta nesse ambiente, incluindo a transição automática de status.
 
-O enunciado completo está em [`docs/enunciado-teste.md`](docs/enunciado-teste.md).
+O enunciado completo está em [`docs/enunciado-teste.md`](docs/enunciado-teste.md). Para entender a arquitetura, a modelagem de dados e como o frontend e as Cloud Functions funcionam por dentro, ver [`ARQUITETURA.md`](ARQUITETURA.md).
 
 ## Estrutura
 
@@ -83,9 +83,4 @@ Requer estar autenticado (`firebase login`) e ter um projeto configurado (`fireb
 
 ## Decisões técnicas
 
-- **Modelagem de dados:** `connections`, `contacts` e `messages` são collections de nível raiz (sem subcoleções), cada documento carregando um campo `clientId` denormalizado. Isso permite tanto às Security Rules quanto às queries do client isolar os dados por tenant sem precisar de leituras auxiliares (`get()`).
-- **Isolamento multi-tenant:** toda leitura/escrita é validada em `firestore.rules` comparando `clientId` com `request.auth.uid`. Importante: para uma *query de coleção* (list), o Firestore só autoriza se a própria query já filtra pelos mesmos campos que a regra usa — por isso as queries de `contacts`/`messages` filtram por `clientId` além de `connectionId`, não só o documento carrega o campo.
-- **Transição automática de status:** a Cloud Function agendada `flipDueMessages` (`onSchedule`, a cada 1 minuto) é a única responsável por mudar mensagens de `agendada` para `enviada` — o client nunca faz essa transição diretamente, inclusive as Security Rules bloqueiam essa mudança de status via update do client.
-- **Exclusão em cascata:** ao excluir uma `connection`, a Cloud Function `cascadeDeleteConnection` (trigger `onDocumentDeleted`) remove em lote os `contacts` e `messages` associados, evitando dados órfãos.
-- **CRUD direto do client:** operações triviais (criar/editar/excluir conexões, contatos e mensagens) são escritas diretas do SDK do Firestore, protegidas pelas Security Rules — Cloud Functions ficam reservadas para o que exige execução confiável no backend (agendamento, cascade delete).
-- **Paradigma funcional:** sem classes em nenhuma camada — componentes React funcionais, hooks para acesso a dados em tempo real (`onSnapshot`), e Cloud Functions como funções exportadas simples.
+Ver [`ARQUITETURA.md`](ARQUITETURA.md) para a modelagem de dados (sem subcoleções), a estratégia de isolamento multi-tenant nas Security Rules, como o frontend está organizado em camadas, e o funcionamento das duas Cloud Functions (transição automática de status e exclusão em cascata).
