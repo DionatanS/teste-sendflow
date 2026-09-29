@@ -103,8 +103,6 @@ export function MessageFormDialog({
       scheduledFor = result.scheduledFor
     }
 
-    // Ver ConnectionFormDialog: não aguarda o ack do servidor para fechar —
-    // todas as validações relevantes já rodaram de forma síncrona acima.
     onSubmit({ contactIds: selectedContactIds, text: text.trim(), scheduledFor }).catch(
       (err) => {
         console.error('Falha ao salvar mensagem', err)

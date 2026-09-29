@@ -86,7 +86,6 @@ export function BroadcastTab({ connectionId }: { connectionId: string }) {
 
   function handleConfirmDelete() {
     if (!pendingDelete) return
-    // Ver ConnectionFormDialog: não aguarda o ack do servidor para fechar.
     deleteMessage(pendingDelete.id).catch((err) => {
       console.error('Falha ao excluir mensagem', err)
     })

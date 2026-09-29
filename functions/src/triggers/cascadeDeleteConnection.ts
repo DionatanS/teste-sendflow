@@ -1,7 +1,7 @@
 import { onDocumentDeleted } from 'firebase-functions/v2/firestore'
 import { deleteConnectionChildren } from '../data/connectionCascade'
 
-/** AD-4: única responsável por limpar contacts/messages ao excluir uma connection. */
+/** Única responsável por limpar contacts/messages órfãos ao excluir uma connection. */
 export const cascadeDeleteConnection = onDocumentDeleted(
   'connections/{connectionId}',
   async (event) => {

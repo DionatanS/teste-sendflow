@@ -54,7 +54,6 @@ export function ConnectionsPage() {
 
   function handleConfirmDelete() {
     if (!pendingDelete) return
-    // Ver ConnectionFormDialog: não aguarda o ack do servidor para fechar.
     deleteConnection(pendingDelete.id).catch((err) => {
       console.error('Falha ao excluir conexão', err)
     })

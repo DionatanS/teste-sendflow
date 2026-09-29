@@ -7,8 +7,8 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    // AD-1: clientId denormalizado em todo documento — comparação direta,
-    // sem get() auxiliar, tanto em leitura/update/delete (resource.data)
+    // clientId denormalizado em todo documento — comparação direta, sem
+    // get() auxiliar, tanto em leitura/update/delete (resource.data)
     // quanto em create (request.resource.data).
     function ownsExisting() {
       return isSignedIn() && resource.data.clientId == request.auth.uid;
@@ -27,8 +27,8 @@ service cloud.firestore {
                     && request.resource.data.clientId == resource.data.clientId;
     }
 
-    // contacts: connectionId não é revalidado contra o dono aqui (AD-7) —
-    // a UI só oferece as connections do próprio cliente; isolamento de
+    // contacts: connectionId não é revalidado contra o dono aqui — a UI
+    // só oferece as connections do próprio cliente; isolamento de
     // leitura/escrita continua garantido por clientId por documento.
     match /contacts/{contactId} {
       allow read, delete: if ownsExisting();
@@ -41,7 +41,7 @@ service cloud.firestore {
 
     // messages: client só cria/edita/apaga; a transição para "enviada" por
     // agendamento é feita exclusivamente pela Cloud Function flipDueMessages
-    // (Admin SDK, que ignora estas regras) — AD-3.
+    // (Admin SDK, que ignora estas regras).
     match /messages/{messageId} {
       allow read, delete: if ownsExisting();
       allow create: if ownsIncoming()

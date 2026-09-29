@@ -52,7 +52,6 @@ export function ContactsTab({ connectionId }: { connectionId: string }) {
 
   function handleConfirmDelete() {
     if (!pendingDelete) return
-    // Ver ConnectionFormDialog: não aguarda o ack do servidor para fechar.
     deleteContact(pendingDelete.id).catch((err) => {
       console.error('Falha ao excluir contato', err)
     })

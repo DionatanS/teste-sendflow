@@ -2,7 +2,6 @@ export type ScheduleValidationResult =
   | { ok: true; scheduledFor: Date }
   | { ok: false; error: string }
 
-/** Valida o valor de um input datetime-local para agendamento. FR-13: rejeita datas no passado. */
 export function validateScheduledDate(
   datetimeLocalValue: string,
   now: Date = new Date(),

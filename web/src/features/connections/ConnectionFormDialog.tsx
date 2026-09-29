@@ -33,10 +33,7 @@ export function ConnectionFormDialog({
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
     if (!name.trim()) return
-    // Não aguarda o round-trip ao servidor: o cache local do Firestore +
-    // onSnapshot já refletem a escrita otimisticamente, e a Promise de
-    // escrita só resolve após o ack do servidor — aguardá-la travaria o
-    // diálogo aberto (com o botão em loading) enquanto offline/lento.
+    // Fecha sem esperar o servidor: onSnapshot já reflete a escrita otimista.
     onSubmit({ name: name.trim() }).catch((err) => {
       console.error('Falha ao salvar conexão', err)
     })

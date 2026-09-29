@@ -10,10 +10,10 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 /**
  * Testa firestore.rules contra o emulador (exige `firebase emulators:exec`,
  * roda como `npm run test:rules` — ver README para a limitação de ambiente
- * conhecida ao rodar o emulador do Firestore localmente nesta máquina).
+ * conhecida ao rodar o emulador do Firestore localmente).
  *
- * Cobre AD-1 (isolamento multi-tenant por clientId) e AD-3 (status de
- * mensagem só muda por create, nunca por update do client).
+ * Cobre o isolamento multi-tenant por clientId e a regra de que o status
+ * de uma mensagem só muda por create, nunca por update do client.
  */
 
 const CLIENT_A = 'client-a-uid'
@@ -163,7 +163,7 @@ describe('messages', () => {
     )
   })
 
-  it('nega ao client mudar o status de uma mensagem via update (AD-3)', async () => {
+  it('nega ao client mudar o status de uma mensagem via update', async () => {
     const connectionId = await seedConnection(CLIENT_A, 'Vendas')
     const messageId = await seedMessage(CLIENT_A, connectionId, 'agendada')
     const asA = testEnv.authenticatedContext(CLIENT_A)

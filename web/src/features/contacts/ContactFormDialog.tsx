@@ -39,7 +39,6 @@ export function ContactFormDialog({
   function handleSubmit(event: FormEvent) {
     event.preventDefault()
     if (!isValid) return
-    // Ver ConnectionFormDialog: não aguarda o ack do servidor para fechar.
     onSubmit({ name: name.trim(), phone: phone.trim() }).catch((err) => {
       console.error('Falha ao salvar contato', err)
     })

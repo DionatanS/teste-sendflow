@@ -25,7 +25,6 @@ async function deleteWhereConnection(
   }
 }
 
-/** AD-4: remove os contacts e messages órfãos quando a connection pai é excluída. */
 export async function deleteConnectionChildren(connectionId: string, clientId: string) {
   await deleteWhereConnection('contacts', connectionId, clientId)
   await deleteWhereConnection('messages', connectionId, clientId)

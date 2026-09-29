@@ -4,7 +4,7 @@ Teste técnico para a vaga de Desenvolvedor(a) Full Stack na SendFlow — aplica
 
 **Aplicação publicada:** https://sendflow-26d05.web.app — Hosting, Firestore (rules + indexes) e as duas Cloud Functions (`flipDueMessages`, `cascadeDeleteConnection`) estão no ar num projeto Firebase real (plano Blaze), e o fluxo completo foi validado de ponta a ponta nesse ambiente, incluindo a transição automática de status.
 
-O enunciado completo está em [`docs/enunciado-teste.md`](docs/enunciado-teste.md). Para entender a arquitetura, a modelagem de dados e como o frontend e as Cloud Functions funcionam por dentro, ver [`ARQUITETURA.md`](ARQUITETURA.md).
+Para entender a arquitetura, a modelagem de dados e como o frontend e as Cloud Functions funcionam por dentro, ver [`ARQUITETURA.md`](ARQUITETURA.md).
 
 ## Estrutura
 
@@ -12,7 +12,6 @@ O enunciado completo está em [`docs/enunciado-teste.md`](docs/enunciado-teste.m
 web/         # Frontend (Vite + React + TS + MUI + Tailwind)
 functions/   # Firebase Cloud Functions (TypeScript)
 firestore.rules, firestore.indexes.json, firebase.json   # Config do Firebase na raiz
-docs/        # Enunciado do teste
 ```
 
 ## Pré-requisitos
