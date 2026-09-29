@@ -14,8 +14,3 @@ functions/node_modules/
 .vscode/*
 !.vscode/extensions.json
 .idea
-
-# BMAD (planejamento) e config de sessão do Claude Code — não fazem parte do projeto
-_bmad/
-_bmad-output/
-.claude/
