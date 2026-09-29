@@ -1,32 +1,28 @@
-# React + TypeScript + Vite
+# SendFlow Broadcast — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Frontend da aplicação, construído com **React 19 + TypeScript + Vite**, **Material UI** e **Tailwind CSS**.
 
-Currently, two official plugins are available:
+Para visão geral do projeto, deploy e como tudo se conecta, ver o [README](../README.md) e a [arquitetura](../ARQUITETURA.md) na raiz do repositório.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Comandos
 
-## React Compiler
+```bash
+npm install       # instalar dependências
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+npm run dev       # servidor de desenvolvimento (http://localhost:5173)
+npm run build     # build de produção (gera dist/)
+npm run preview   # servir o build de produção localmente
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+npm run test      # testes unitários (Vitest)
+npm run lint      # lint (oxlint)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Variáveis de ambiente
+
+Copie `.env.example` para `.env` e preencha com as credenciais do seu projeto Firebase (Console → ⚙️ Configurações do projeto → "Seus apps"):
+
+```bash
+cp .env.example .env
+```
+
+`VITE_USE_EMULATORS=true` conecta o app aos emuladores locais do Firebase (Auth/Firestore) em vez do projeto real — útil para desenvolvimento sem custo.
