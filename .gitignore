@@ -1,0 +1,21 @@
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+*-debug.log
+
+# Functions build output
+functions/lib/
+functions/node_modules/
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# BMAD (planejamento) e config de sessão do Claude Code — não fazem parte do projeto
+_bmad/
+_bmad-output/
+.claude/
